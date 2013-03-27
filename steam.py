@@ -21,3 +21,31 @@ for node in dom.getElementsByTagName('game'):
         os.system("title Updating: "+name)
         os.system("E:/Steam/steamcmd.exe +login yourLoginHere yourPasswordHere +app_update "+appID+" +quit")
         x += 1
+
+# TODO:
+'''
+Download steamcmd.exe from steam servers and unzip
+Write Check if file exisits function
+Log output
+'''
+# PLAN
+'''
+CHECK IF steam.exe EXISITS:
+-IF FALSE: print "not in steam root"
+-IF TRUE: continue
+
+CHECK IF steamcmd.exe EXISTS:
+-IF FALSE:
+        DOWNLOAD steamcmd.exe:
+        import os
+        import urllib2
+
+        url = 'http://starick.me/steamcmd.exe'
+        steamcmd = urllib2.urlopen(url)
+
+        with open(os.path.basename(url), "wb") as local_file:
+            local_file.write(steamcmd.read())
+-IF TRUE:continue
+
+ASK FOR STEAMID,USERNAME,PASSWORD
+'''
