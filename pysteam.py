@@ -3,6 +3,10 @@ import urllib
 import urllib2
 import os
 import codecs
+import platform
+
+system = platform.system()
+
 codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None)
 
 username = raw_input('Please enter your username you use to login: ')
@@ -23,10 +27,12 @@ try:
 except IOError:
    print 'steamcmd.exe not found!'
    print 'Downloading steamcmd.exe'
-   url = 'http://starick.me/steamcmd.exe'
+   url = 'hhttp://media.steampowered.com/client/steamcmd_win32.zip'
    steamcmd = urllib2.urlopen(url)
    with open(os.path.basename(url), "wb") as local_file:
            local_file.write(steamcmd.read())
+           with zipfile.ZipFile('steamcmd_win32.zip', "r") as z:
+		       z.extractall(os.getcwd())
    os.system("steamcmd.exe +quit")
 
 print 'Connecting to Steam...'
