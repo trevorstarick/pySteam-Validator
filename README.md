@@ -20,3 +20,7 @@ If you have Python 2.7.3 installed you can skip to part 3.
 
 ###Steam
 * Steam isn't loading now or crashes! - Delete the `ClientRegistry.blob` file located inside your Steam root folder. This generaly fixes most Steam loading issues.
+
+
+##Donations
+Bitcoin: 1PLi4dHvvghyrCjm5fwnN7Ap1FwxrdWKVk
