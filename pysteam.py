@@ -1,45 +1,66 @@
 from xml.dom.minidom import parse
-import urllib
-import urllib2
-import os
-import codecs
-import platform
-import getpass
+import urllib, urllib2, os, codecs, platform, getpass
 codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None)
 
-#Define OS specifc variables
+# -- Define OS specifc variables --
 
-if platform.system() != "Windows":
-  if platform.system() == "Posix":
+if(platform.system()) == "Posix":
     steamapps = "steamapps"
     steamcmd = "steamcmd.sh"
+    url = "http://media.steampowered.com/client/steamcmd_linux.tar.gz"
     def cls():
       os.system("clear")
+    def getsteamcmd():
+        steamcmd_download = urllib2.urlopen(url)
+        with open(os.path.basename(url), "wb") as local_file:
+            local_file.write(steamcmd_download.read())
+            with zipfile.ZipFile('steamcmd_linux.tar.gz', "r") as z:
+                z.extractall(os.getcwd())
     cls()
     print('Linux is not supported at this time. Watch the GitHub repo or check back later!')
     raw_input('Press enter to close...')
     cls()
     exit()
-  if platform.system() == "Darwin":
+
+elif(platform.system()) == "Darwin":
     steamapps = "steamapps"
     steamcmd = "steamcmd.sh"
+    url = "http://media.steampowered.com/client/steamcmd_linux.tar.gz"
     def cls():
       os.system("clear")
+    def getsteamcmd():
+        steamcmd_download = urllib2.urlopen(url)
+        with open(os.path.basename(url), "wb") as local_file:
+            local_file.write(steamcmd_download.read())
+            with zipfile.ZipFile('steamcmd_linux.tar.gz', "r") as z:
+                z.extractall(os.getcwd())
     cls()
     print('OS X is not supported at this time. Watch the GitHub repo or check back later!')
     raw_input('Press enter to close...')
     cls()
     exit()
-  steamapps = "SteamApps"
-  steamcmd = "steamcmd.exe"
-  def cls():
-    os.system("cls")
+
+elif(platform.system()) == "Windows":
+    steamapps = "SteamApps"
+    steamcmd = "steamcmd.exe"
+    url = 'hhttp://media.steampowered.com/client/steamcmd_win32.zip'
+    def cls():
+        os.system("cls")
+    def getsteamcmd():
+        steamcmd_download = urllib2.urlopen(url)
+        with open(os.path.basename(url), "wb") as local_file:
+            local_file.write(steamcmd_download.read())
+            with zipfile.ZipFile('steamcmd_win32.zip', "r") as z:
+                z.extractall(os.getcwd())
+
+# -- MAIN PROGRAM --
 
 username = raw_input('Please enter your username you use to login: ')
 password = getpass.getpass('Please enter your password: ')
-steam_id = raw_input('Please enter your SteamID: ')
+steam_id = raw_input('Please enter your SteamID/custom URL: ')
 
-if os.path.exists(steamapps) == false:
+if os.path.exists(steamapps) == False:
+   #Change example location for future use
    print('Not in Steam root folder (eg. C:\Program File (x86)\Steam\)!')
    print('Please move to Steam root and run again!')
    raw_input('Press enter to close...')
@@ -48,16 +69,10 @@ if os.path.exists(steamapps) == false:
 try:
    with open(steamcmd): pass
 except IOError:
-   #Change example location for future use
    print steamcmd+' not found!'
    print 'Downloading '+steamcmd
-   url = 'hhttp://media.steampowered.com/client/steamcmd_win32.zip'
-   steamcmd = urllib2.urlopen(url)
-   with open(os.path.basename(url), "wb") as local_file:
-           local_file.write(steamcmd.read())
-           with zipfile.ZipFile('steamcmd_win32.zip', "r") as z:
-		       z.extractall(os.getcwd())
-   os.system("steamcmd.exe +quit")
+   getsteamcmd()
+   os.system(steamcmd+" +quit")
 
 print 'Connecting to Steam...'
 xml = urllib.urlopen('http://steamcommunity.com/id/'+steam_id+'/games?tab=all&xml=1')
@@ -80,13 +95,15 @@ for node in dom.getElementsByTagName('game'):
         os.system("steamcmd.exe +login "+username+" "+password+" +app_update "+appID+" +quit")
         x += 1
 
+# -- "Documentation" --
 
 # TODO:
 '''
 Log output
-OSX/Linux support (variables semi-done)
+OSX/Linux support (OS specific variables semi-done)
 Installer
 '''
+
 # PLAN
 '''
 CHECK IF steam.exe EXISITS:
