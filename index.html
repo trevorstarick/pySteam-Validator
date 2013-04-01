@@ -1,52 +1,107 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Pysteam-validator : A program written to validate a users Steam game library." />
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
 
-    <title>Pysteam-validator</title>
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Pysteam-validator by trevorstarick</title>
   </head>
 
   <body>
+    <a id="forkme_banner" href="https://github.com/trevorstarick/pySteam-Validator">View on GitHub</a>
+    <div class="shell">
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/trevorstarick/pySteam-Validator">View on GitHub</a>
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Pysteam-validator</h1>
+            <h2>A program written to validate a users Steam game library.</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
 
-          <h1 id="project_title">Pysteam-validator</h1>
-          <h2 id="project_tagline">A program written to validate a users Steam game library.</h2>
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/trevorstarick/pySteam-Validator/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/trevorstarick/pySteam-Validator/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/trevorstarick/pySteam-Validator/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/trevorstarick/pySteam-Validator/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
         <h1>pySteam Validator</h1>
 
 <p>A program written to validate and download a users Steam game library. Uses the SteamCMD.exe application by Valve.</p>
 
 <h2>Usage</h2>
 
-<p>To run the program, copy <code>pysteam.py</code> to your Steam root directory (eg. <code>C:\Program Files(x86)\Steam\</code>) and execute <code>python steam.py</code> or copy everything from the <code>dist</code> folder into the root Steam folder and run <code>pysteam.exe</code></p>
-      </section>
-    </div>
+<p>If you have Python 2.7.3 installed you can skip to part 3.</p>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Pysteam-validator maintained by <a href="https://github.com/trevorstarick">trevorstarick</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+<ol>
+<li>Download <a href="http://www.python.org/getit/releases/2.7.3/">Python 2.7.3</a>
+</li>
+<li>Install Python 2.7.3 and make sure that <code>C:\Python27\</code> is in your <code>$PATH</code>
+</li>
+<li>To run the program, copy <code>pysteam.py</code> to your Steam root directory (eg. <code>C:\Program Files(x86)\Steam\</code>) and execute <code>python steam.py</code>
+</li>
+</ol><p><strong>Bonus:</strong></p>
+
+<ol>
+<li>If you want to compile <code>pysteam.py</code> into an executable file download and install <a href="http://www.py2exe.org/">py2exe</a> and run <code>build.py</code>
+</li>
+<li>Navigate to <code>dist</code> and copy everything to your Steam root directory</li>
+<li>Now you should be able to run <code>pysteam.exe</code>
+</li>
+</ol><h2>Common Issues</h2>
+
+<h3>pysteam.py</h3>
+
+<ul>
+<li>
+<code>Not in Steam root folder (eg. C:\Program File (x86)\Steam\)!</code> - Move <code>pysteam.py</code> or <code>pysteam.exe</code> to wherever you installed Steam and the <code>steam.exe</code> executable is located.</li>
+</ul><h3>setup.py</h3>
+
+<ul>
+<li>
+<code>ImportError: No module named py2exe</code> - Install <a href="http://www.py2exe.org/">py2exe</a>.</li>
+</ul><h3>Steam</h3>
+
+<ul>
+<li>Steam isn't loading now or crashes! - Delete the <code>ClientRegistry.blob</code> file located inside your Steam root directory. This generaly fixes most Steam loading issues.</li>
+</ul><h2>Donations</h2>
+
+<p><strong>Bitcoin:</strong> <em>1PLi4dHvvghyrCjm5fwnN7Ap1FwxrdWKVk</em></p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/trevorstarick">trevorstarick</a> can be found on <a href="https://github.com/trevorstarick/pySteam-Validator">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
       </footer>
+
     </div>
 
               <script type="text/javascript">
@@ -59,7 +114,6 @@
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-
 
   </body>
 </html>
