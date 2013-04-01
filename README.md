@@ -1,7 +1,7 @@
 #pySteam Validator
 
 
-A program written to validate and download a users Steam game library. Uses the SteamCMD.exe application by Valve.
+A program written to validate and download a users Steam game library. Uses the SteamCMD.exe application by Valve&copy;.
 
 ##Usage
 If you have Python 2.7.3 installed you can skip to part 3.
