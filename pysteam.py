@@ -4,29 +4,53 @@ import urllib2
 import os
 import codecs
 import platform
-
-system = platform.system()
-
+import getpass
 codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None)
 
+#Define OS specifc variables
+
+if platform.system() != "Windows":
+  if platform.system() == "Posix":
+    steamapps = "steamapps"
+    steamcmd = "steamcmd.sh"
+    def cls():
+      os.system("clear")
+    cls()
+    print('Linux is not supported at this time. Watch the GitHub repo or check back later!')
+    raw_input('Press enter to close...')
+    cls()
+    exit()
+  if platform.system() == "Darwin":
+    steamapps = "steamapps"
+    steamcmd = "steamcmd.sh"
+    def cls():
+      os.system("clear")
+    cls()
+    print('OS X is not supported at this time. Watch the GitHub repo or check back later!')
+    raw_input('Press enter to close...')
+    cls()
+    exit()
+  steamapps = "SteamApps"
+  steamcmd = "steamcmd.exe"
+  def cls():
+    os.system("cls")
+
 username = raw_input('Please enter your username you use to login: ')
-password = raw_input('Please enter your password: ')
+password = getpass.getpass('Please enter your password: ')
 steam_id = raw_input('Please enter your SteamID: ')
 
-os.system('cls')
-
-try:
-   with open('steam.exe'): pass
-except IOError:
+if os.path.exists(steamapps) == false:
    print('Not in Steam root folder (eg. C:\Program File (x86)\Steam\)!')
-   raw_input('Please move to Steam root and run again!')
+   print('Please move to Steam root and run again!')
+   raw_input('Press enter to close...')
    exit()
 
 try:
-   with open('steamcmd.exe'): pass
+   with open(steamcmd): pass
 except IOError:
-   print 'steamcmd.exe not found!'
-   print 'Downloading steamcmd.exe'
+   #Change example location for future use
+   print steamcmd+' not found!'
+   print 'Downloading '+steamcmd
    url = 'hhttp://media.steampowered.com/client/steamcmd_win32.zip'
    steamcmd = urllib2.urlopen(url)
    with open(os.path.basename(url), "wb") as local_file:
@@ -41,7 +65,7 @@ print 'Parsing response...'
 dom = parse(xml)
 x = 0
 
-os.system('cls')
+cls()
 
 for node in dom.getElementsByTagName('game'):
 	appID = dom.getElementsByTagName('appID')[x].toxml()
@@ -59,9 +83,8 @@ for node in dom.getElementsByTagName('game'):
 
 # TODO:
 '''
-Download steamcmd.exe from steam servers and unzip
 Log output
-OSX/Linux support
+OSX/Linux support (variables semi-done)
 Installer
 '''
 # PLAN
