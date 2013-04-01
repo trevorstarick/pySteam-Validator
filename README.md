@@ -17,3 +17,6 @@ If you have Python 2.7.3 installed you can skip to part 3.
 
 ###setup.py
 * `ImportError: No module named py2exe` - Install [py2exe](http://www.py2exe.org/).
+
+###Steam
+* Steam isn't loading now or crashes! - Delete the `ClientRegistry.blob` file located inside your Steam root folder. This generaly fixes most Steam loading issues.
