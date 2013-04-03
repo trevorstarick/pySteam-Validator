@@ -4,7 +4,7 @@ codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else No
 
 # -- Define OS specifc variables --
 
-if(platform.system()) == "Posix":
+if(platform.system()) == "Posix" or "Linux":
     steamapps = "steamapps"
     steamcmd = "steamcmd.sh"
     url = "http://media.steampowered.com/client/steamcmd_linux.tar.gz"
