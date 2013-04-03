@@ -1,5 +1,12 @@
+#!/usr/bin/python
+
 from xml.dom.minidom import parse
-import urllib, urllib2, os, codecs, platform, getpass
+import urllib
+import urllib2 
+import os
+import codecs
+import platform
+import getpass
 codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None)
 
 # -- Define OS specifc variables --
