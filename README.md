@@ -1,7 +1,7 @@
 #pySteam Validator
 
 
-A program written to validate and download a users Steam game library. Uses the SteamCMD.exe application by Valve&copy;.
+A program written to validate and download a users Steam game library. Uses the SteamCMD.exe application by Valve.
 
 ##Usage
 If you have Python 2.7.3 installed you can skip to part 3.
@@ -25,7 +25,3 @@ If you have Python 2.7.3 installed you can skip to part 3.
 
 ###Steam
 * Steam isn't loading now or crashes! - Delete the `ClientRegistry.blob` file located inside your Steam root directory. This generaly fixes most Steam loading issues.
-
-
-##Donations
-**Bitcoin:** _1PLi4dHvvghyrCjm5fwnN7Ap1FwxrdWKVk_
