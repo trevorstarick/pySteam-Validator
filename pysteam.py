@@ -3,89 +3,46 @@
 
 # pySteam-Validator: Validates and downloads a users Steam library.
 
-# Version:  1.0 (2013/04/03)
+# Version:  1.1 (2013/04/03)
 # Author:   Trevor Starick <trevor.starick@gmail.com>
 
 
 from xml.dom.minidom import parse
 import urllib
-import urllib2
 import os
 import codecs
 import platform
 import getpass
 import zipfile
-codecs.register(lambda name: codecs.lookup(
-    'utf-8') if name == 'cp65001' else None)
+codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None)
 
-# -- Define OS specifc variables --
-
-if(platform.system()) == "Posix" or "Linux":
-    steamapps = "steamapps"
-    steamcmd = "steamcmd.sh"
-    url = "http://media.steampowered.com/client/steamcmd_linux.tar.gz"
-
-    def cls():
-        os.system("clear")
-
-    def getsteamcmd():
-        steamcmd_download = urllib2.urlopen(url)
-        with open(os.path.basename(url), "wb") as local_file:
-            local_file.write(steamcmd_download.read())
-            with zipfile.ZipFile('steamcmd_linux.tar.gz', "r") as z:
-                z.extractall(os.getcwd())
-    cls()
+# -- Define OS specific variables --
+if(platform.system()) == "Windows":
+    url = 'http://media.steampowered.com/client/steamcmd_win32.zip'
+    os.system("cls")
+elif(platform.system()) == "Posix" or "Linux":
+    os.system('clear')
     print(
         'Linux is not supported at this time.'
         'Watch the GitHub repo or check back later!')
     raw_input('Press enter to close...')
-    cls()
+    os.system('clear')
     exit()
-
 elif(platform.system()) == "Darwin":
-    steamapps = "steamapps"
-    steamcmd = "steamcmd.sh"
-    url = "http://media.steampowered.com/client/steamcmd_linux.tar.gz"
-
-    def cls():
-        os.system("clear")
-
-    def getsteamcmd():
-        steamcmd_download = urllib2.urlopen(url)
-        with open(os.path.basename(url), "wb") as local_file:
-            local_file.write(steamcmd_download.read())
-            with zipfile.ZipFile('steamcmd_linux.tar.gz', "r") as z:
-                z.extractall(os.getcwd())
-    cls()
+    os.system('clear')
     print(
         'OS X is not supported at this time.'
         'Watch the GitHub repo or check back later!')
     raw_input('Press enter to close...')
-    cls()
+    os.system('clear')
     exit()
 
-elif(platform.system()) == "Windows":
-    steamapps = "SteamApps"
-    steamcmd = "steamcmd.exe"
-    url = 'hhttp://media.steampowered.com/client/steamcmd_win32.zip'
-
-    def cls():
-        os.system("cls")
-
-    def getsteamcmd():
-        steamcmd_download = urllib2.urlopen(url)
-        with open(os.path.basename(url), "wb") as local_file:
-            local_file.write(steamcmd_download.read())
-            with zipfile.ZipFile('steamcmd_win32.zip', "r") as z:
-                z.extractall(os.getcwd())
-
 # -- MAIN PROGRAM --
-
 username = raw_input('Please enter your username you use to login: ')
 password = getpass.getpass('Please enter your password: ')
 steam_id = raw_input('Please enter your SteamID/custom URL: ')
 
-if os.path.exists(steamapps) is False:
+if os.path.exists("SteamApps") is False:
     # Change example location for future use
     print('Not in Steam root folder (eg. C:\Program File (x86)\Steam\)!')
     print('Please move to Steam root and run again!')
@@ -93,13 +50,15 @@ if os.path.exists(steamapps) is False:
     exit()
 
 try:
-    with open(steamcmd):
+    with open("steamcmd.exe"):
         pass
 except IOError:
-    print steamcmd+' not found!'
-    print 'Downloading '+steamcmd
-    getsteamcmd()
-    os.system(steamcmd+" +quit")
+    print 'steamcmd.exe not found!'
+    print 'Downloading steamcmd.exe'
+    urllib.urlretrieve(url, "steamcmd_win32.zip")
+    with zipfile.ZipFile('steamcmd_win32.zip', "r") as z:
+        z.extractall(os.getcwd())
+    os.system("steamcmd.exe +quit")
 
 print 'Connecting to Steam...'
 xml = urllib.urlopen(
@@ -108,7 +67,7 @@ print 'Parsing response...'
 dom = parse(xml)
 x = 0
 
-cls()
+os.system("cls")
 
 for node in dom.getElementsByTagName('game'):
     appID = dom.getElementsByTagName('appID')[x].toxml()
@@ -120,6 +79,5 @@ for node in dom.getElementsByTagName('game'):
     name = name.encode('ascii', 'ignore')
     print name + " | " + appID + '\n'
     os.system("title Updating: "+name)
-    os.system("steamcmd.exe +login "+username +
-              " "+password+" +app_update "+appID+" +quit")
+    os.system("steamcmd.exe +login "+username+" "+password+" +app_update "+appID+" +quit")
     x += 1
