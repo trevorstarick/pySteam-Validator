@@ -23,7 +23,7 @@ if(platform.system()) == "Windows":
 elif(platform.system()) == "Posix" or "Linux":
     os.system('clear')
     print(
-        'Linux is not supported at this time.'
+        'Linux is not supported at this time. '
         'Watch the GitHub repo or check back later!')
     raw_input('Press enter to close...')
     os.system('clear')
@@ -31,7 +31,7 @@ elif(platform.system()) == "Posix" or "Linux":
 elif(platform.system()) == "Darwin":
     os.system('clear')
     print(
-        'OS X is not supported at this time.'
+        'OS X is not supported at this time. '
         'Watch the GitHub repo or check back later!')
     raw_input('Press enter to close...')
     os.system('clear')
